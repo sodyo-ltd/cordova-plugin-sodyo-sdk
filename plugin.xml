@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-sodyo-sdk" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>SodyoSDKWrapper</name>
+    <js-module name="SodyoSDKWrapper" src="www/SodyoSDK.js">
+        <clobbers target="cordova.plugins.SodyoSDK"/>
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="SodyoSDKWrapper">
+                <param name="android-package" value="org.apache.cordova.sodyosdk.SodyoSDKWrapper"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.sodyo.sdk.SodyoScannerActivity" android:label="@string/app_name">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW"/>
+
+                    <category android:name="android.intent.category.DEFAULT"/>
+                    <category android:name="android.intent.category.BROWSABLE"/>
+
+                    <data android:scheme="sodyo"/>
+                </intent-filter>
+            </activity>
+        </config-file>
+
+        <source-file src="src/android/SodyoSDKWrapper.java" target-dir="src/org/apache/cordova/sodyosdk"/>
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference"/>
+    </platform>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="SodyoSDKWrapper">
+                <param name="ios-package" value="SodyoSDKWrapper"/>
+            </feature>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+            <string>Used for scan Sodyo-codes</string>
+        </config-file>
+        <podspec>
+            <config>
+            </config>
+            <pods use-frameworks="true">
+                <pod name="AFNetworking" spec="~> 3.2.1"/>
+                <pod name="SodyoSDK" spec="~> 3.40.041"/>
+            </pods>
+        </podspec>
+
+        <source-file src="src/ios/SodyoSDKWrapper.m"/>
+    </platform>
+</plugin>

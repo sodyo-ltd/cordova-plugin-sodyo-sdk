@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-sodyo-sdk",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sodyo-ltd/cordova-plugin-sodyo-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/sodyo-ltd/cordova-plugin-sodyo-sdk/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-sodyo-sdk",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "sodyo"
+  ],
+  "author": "Sodyo",
+  "license": "ISC"
+}
