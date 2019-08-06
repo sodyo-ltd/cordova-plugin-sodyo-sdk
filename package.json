@@ -1,6 +1,6 @@
 {
-  "name": "cordova-plugin-sodyo-sdk",
-  "version": "0.0.1",
+  "name": "@sodyo/cordova-plugin-sodyo-sdk",
+  "version": "0.0.2",
   "description": "",
   "repository": {
     "type": "git",
