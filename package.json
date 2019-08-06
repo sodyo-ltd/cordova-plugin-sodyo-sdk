@@ -10,7 +10,7 @@
     "url": "https://github.com/sodyo-ltd/cordova-plugin-sodyo-sdk/issues"
   },
   "cordova": {
-    "id": "cordova-plugin-sodyo-sdk",
+    "id": "@sodyo/cordova-plugin-sodyo-sdk",
     "platforms": [
       "android",
       "ios"
