@@ -21,13 +21,13 @@ Install the plugin
 Init the plugin with your Sodyo App Key project token with
 ```
 SodyoSDK.init(your-app-key,
-    function(){ /* successful init */ },
-    function(){ /* fail */})
+    function(){ /* successful init callback */ },
+    function(){ /* fail callback */})
 ```
 Open the Sodyo scanner
 ```
 SodyoSDK.start(
-    function(immedateContentData){ /* data content callback */ },
+    function(markerData){ /* data content callback */ },
     function(){ /* fail */})
 ```
 Close Sodyo scanner
