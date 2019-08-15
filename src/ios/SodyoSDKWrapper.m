@@ -24,6 +24,10 @@
     CDVPluginResult* pluginResult = nil;
     NSString* code = [command.arguments objectAtIndex:0];
 
+    if (code == nil || [code length] == 0) {
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+
     if (code != nil && [code length] > 0) {
         [SodyoSDK LoadApp:code Delegate:self MarkerDelegate:self PresentingViewController:nil];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
