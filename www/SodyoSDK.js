@@ -10,14 +10,13 @@ function registerCallback (name, callback) {
 
 document.addEventListener('deviceready', function() {
   exec(
-    function(callbackName) {
-      console.log(callbackName, callbacks)
+    function(callbackName, arg) {
       if (!callbacks.hasOwnProperty(callbackName)) {
         console.error('Callback "' + callbackName + '" are not found')
         return
       }
 
-      callbacks[callbackName]()
+      callbacks[callbackName](arg)
     },
     function(e) {
       console.error(e.stack || e)
