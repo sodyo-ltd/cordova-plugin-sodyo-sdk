@@ -22,16 +22,68 @@ Init the plugin with your Sodyo App Key project token with
 ```
 SodyoSDK.init(your-app-key,
     function(){ /* successful init callback */ },
-    function(){ /* fail callback */})
+    function(){ /* fail init callback */})
 ```
+
+Set the Sodyo error listener
+```
+SodyoSDK.setErrorListener(
+    function(err){ /* fail callback */ }
+)
+```
+
 Open the Sodyo scanner
 ```
 SodyoSDK.start(
     function(markerData){ /* data content callback */ },
-    function(){ /* fail */})
+    function(){ /* fail */}
+)
 ```
+
 Close Sodyo scanner
 ```
 SodyoSDK.close()
+```
+
+Close Sodyo scanner
+```
+SodyoSDK.close()
+```
+
+Personal User Information
+
+```
+SodyoSDK.setUserInfo(userInfo)
+```
+
+Personal User Information
+
+```
+SodyoSDK.setUserInfo(userInfo)
+```
+
+User Identification (ID)
+```
+SodyoSDK.setAppUserId(userId)
+```
+
+Setting Scanner Preferences
+```
+SodyoSDK.setScannerParams(scannerPreferences)
+```
+
+Personalized Content
+```
+SodyoSDK.setCustomAdLabel(label)
+```
+`The label may include one or more tags in comma-separated values (CSV) format as follows: “label1,label2,label3”`
+
+Customizing the scanner user interface
+```
+// set any html (with css)
+SodyoSDK.setOverlayView('<a href="sodyosdk://handleClose">Close</a>') 
+
+// define a handler for the button
+SodyoSDK.setOverlayCallback('handleClose', () => { /* do something */ });
 ```
 
