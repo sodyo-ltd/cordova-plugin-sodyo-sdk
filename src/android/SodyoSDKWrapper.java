@@ -68,9 +68,14 @@ public class SodyoSDKWrapper extends CordovaPlugin {
             Log.e(TAG, message);
 
             if (eventCallbackContext != null) {
+
+                ArrayList<PluginResult> multipartMessages = new ArrayList<>();
+                multipartMessages.add(new PluginResult(PluginResult.Status.OK, "sodyoError"));
+                multipartMessages.add(new PluginResult(PluginResult.Status.OK, err.getMessage()));
+
                 PluginResult result = new PluginResult(
                         PluginResult.Status.OK,
-                        "sodyoError"
+                        multipartMessages
                 );
                 result.setKeepCallback(true);
                 eventCallbackContext.sendPluginResult(result);
