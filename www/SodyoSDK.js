@@ -3,7 +3,6 @@ var exec = require('cordova/exec')
 var callbacks = {}
 
 function registerCallback (name, callback) {
-  console.log(name, callback)
   if (!name || typeof callback !== 'function') return false
   callbacks[name] = callback
 }
