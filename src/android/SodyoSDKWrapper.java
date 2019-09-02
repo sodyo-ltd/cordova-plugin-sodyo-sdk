@@ -20,6 +20,7 @@ import com.sodyo.sdk.SodyoInitCallback;
 import com.sodyo.sdk.SodyoScannerActivity;
 import com.sodyo.sdk.SodyoScannerCallback;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class SodyoSDKWrapper extends CordovaPlugin {
