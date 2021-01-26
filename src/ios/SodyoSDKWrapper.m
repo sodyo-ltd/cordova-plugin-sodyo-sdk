@@ -41,7 +41,7 @@
     NSString* code = [command.arguments objectAtIndex:0];
 
     if (code != nil) {
-        [SodyoSDK LoadApp:code Delegate:self MarkerDelegate:self PresentingViewController:nil];
+        [SodyoSDK LoadApp:code Delegate:self MarkerDelegate:self PresentingViewController:self.viewController];
     } else {
         CDVPluginResult* pluginResult = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
@@ -175,6 +175,15 @@
     NSLog(@"Failed loading Sodyo: %@", error);
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.startCallbackId];
+}
+
+- (void) onSodyoEvent:(NSString*)eventName eventData:(NSString*)eventData {
+    NSLog(@"onSodyoEvent");
+
+    NSArray* params = @[@"sodyoEvent", eventName, eventData];
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsMultipart:params];
+    [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.eventCallbackId];
 }
 
 - (void) sodyoError:(NSError *)error {

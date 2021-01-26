@@ -40,20 +40,17 @@ SodyoSDK.start(
 )
 ```
 
+Set Sodyo event listener (events from scanner)
+```
+const unsubscribe = SodyoSDK.setSodyoEventListener((eventName, eventData) => {
+...
+})
+unsubscribe()
+```
+
 Close Sodyo scanner
 ```
 SodyoSDK.close()
-```
-
-Close Sodyo scanner
-```
-SodyoSDK.close()
-```
-
-Personal User Information
-
-```
-SodyoSDK.setUserInfo(userInfo)
 ```
 
 Personal User Information

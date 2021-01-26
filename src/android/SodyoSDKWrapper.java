@@ -19,6 +19,7 @@ import com.sodyo.sdk.Sodyo;
 import com.sodyo.sdk.SodyoInitCallback;
 import com.sodyo.sdk.SodyoScannerActivity;
 import com.sodyo.sdk.SodyoScannerCallback;
+import com.sodyo.sdk.SodyoEventCallback;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class SodyoSDKWrapper extends CordovaPlugin {
 
     private CallbackContext eventCallbackContext;
 
-    private class SodyoCallback implements SodyoScannerCallback, SodyoInitCallback {
+    private class SodyoCallback implements SodyoScannerCallback, SodyoInitCallback, SodyoEventCallback {
 
         private CallbackContext callbackContext;
 
@@ -102,6 +103,25 @@ public class SodyoSDKWrapper extends CordovaPlugin {
                 message = "SodyoScannerCallback.onMarkerDetect  data=\"" + data + "\" error=\"" + error + "\"";
                 Log.e(TAG, message);
                 callbackContext.error(error);
+            }
+        }
+
+        @Override
+        public void onSodyoEvent(String eventName, String eventData) {
+            Log.i(TAG, "onSodyoEvent()");
+
+            if (eventCallbackContext != null) {
+                ArrayList<PluginResult> multipartMessages = new ArrayList<>();
+                multipartMessages.add(new PluginResult(PluginResult.Status.OK, "sodyoEvent"));
+                multipartMessages.add(new PluginResult(PluginResult.Status.OK, eventName));
+                multipartMessages.add(new PluginResult(PluginResult.Status.OK, eventData));
+
+                PluginResult result = new PluginResult(
+                        PluginResult.Status.OK,
+                        multipartMessages
+                );
+                result.setKeepCallback(true);
+                eventCallbackContext.sendPluginResult(result);
             }
         }
     }
@@ -210,6 +230,7 @@ public class SodyoSDKWrapper extends CordovaPlugin {
         Intent intent = new Intent(this.context, SodyoScannerActivity.class);
         this.context.startActivityForResult(intent, SODYO_SCANNER_REQUEST_CODE);
         Sodyo.getInstance().setSodyoScannerCallback(callbackClosure);
+        Sodyo.getInstance().setSodyoEventCallback(callbackClosure);
     }
 
     private void close() {
@@ -232,7 +253,7 @@ public class SodyoSDKWrapper extends CordovaPlugin {
         Sodyo.setAppUserId(userId);
     }
 
-    private void setScannerParams(Map<String, ?> scannerPreferences) {
+    private void setScannerParams(Map<String, String> scannerPreferences) {
         Log.i(TAG, "setScannerParams()");
         Sodyo.setScannerParams(scannerPreferences);
     }

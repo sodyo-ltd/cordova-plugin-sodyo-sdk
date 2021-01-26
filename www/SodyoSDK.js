@@ -2,20 +2,31 @@ var exec = require('cordova/exec')
 
 var callbacks = {}
 
-function registerCallback (name, callback) {
-  if (!name || typeof callback !== 'function') return false
+function registerCallback(name, callback) {
+  if (!name || typeof callback !== 'function') {
+    return false
+  }
+
   callbacks[name] = callback
+}
+
+function removeCallback(name) {
+  if (!callbacks.hasOwnProperty(name)) {
+    return false
+  }
+
+  return delete callbacks[name]
 }
 
 document.addEventListener('deviceready', function() {
   exec(
-    function(callbackName, arg) {
+    function(callbackName, ...args) {
       if (!callbacks.hasOwnProperty(callbackName)) {
         console.error('Callback "' + callbackName + '" are not found')
         return
       }
 
-      callbacks[callbackName](arg)
+      callbacks[callbackName](...args)
     },
     function(e) {
       console.error(e.stack || e)
@@ -65,4 +76,18 @@ module.exports.setOverlayView = function(html) {
 
 module.exports.setOverlayCallback = function(callbackName, callback) {
   registerCallback(callbackName, callback)
+}
+
+module.exports.setSodyoEventListener = function(callback) {
+  const callbackWrapper = (eventName, eventData) => {
+    try {
+      callback(eventName, JSON.parse(eventData))
+    } catch (e) {
+      callback(eventName, eventData)
+    }
+  }
+
+  registerCallback('sodyoEvent', callbackWrapper)
+
+  return () => removeCallback('sodyoEvent')
 }
