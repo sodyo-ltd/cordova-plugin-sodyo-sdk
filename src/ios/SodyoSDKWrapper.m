@@ -2,8 +2,9 @@
 
 #import <Cordova/CDV.h>
 #import <SodyoSDK/SodyoSDK.h>
+#import <WebKit/WebKit.h>
 
-@interface SodyoSDKWrapper : CDVPlugin <SodyoSDKDelegate, SodyoMarkerDelegate, UIWebViewDelegate> {
+@interface SodyoSDKWrapper : CDVPlugin <SodyoSDKDelegate, SodyoMarkerDelegate, WKNavigationDelegate> {
     UIViewController *sodyoScanner;
 }
 
@@ -107,30 +108,40 @@
     if (!self.htmlOverlay) return;
 
     UIView *overlay = [SodyoSDK overlayView];
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
-    webView.delegate = self;
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    webView.navigationDelegate = self;
     webView.opaque = NO;
     webView.backgroundColor = [UIColor clearColor];
-    webView.scalesPageToFit = YES;
+    //webView.scalesPageToFit = YES;
     [webView loadHTMLString:self.htmlOverlay baseURL:nil];
     [overlay addSubview:webView];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+
+    if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
+        NSURLRequest *request = navigationAction.request;
         NSURL *url = request.URL;
         NSString *scheme = [url scheme];
+
         if ([scheme isEqualToString:@"sodyosdk"]) {
             NSString *absoluteUrl = [url absoluteString];
             NSArray *parsedUrl = [absoluteUrl componentsSeparatedByString:@"sodyosdk://"];
-            if ([parsedUrl count] < 2) return NO;
+
+            if ([parsedUrl count] < 2) {
+                decisionHandler(WKNavigationActionPolicyAllow);
+                return;
+            }
 
             NSString *methodName = parsedUrl[1];
             [self callOverlayCallback:methodName];
+
+            decisionHandler(WKNavigationActionPolicyCancel);
+            return;
         }
     }
 
-    return YES;
+   decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 - (void) callOverlayCallback:(NSString*)callackName {
