@@ -43,8 +43,7 @@
             <config>
             </config>
             <pods use-frameworks="true">
-                <pod name="AFNetworking" spec="~> 3.2.1"/>
-                <pod name="SodyoSDK" spec="~> 3.40.041"/>
+                <pod name="SodyoSDK" spec="~> 3.54.18"/>
             </pods>
         </podspec>
 
