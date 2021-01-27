@@ -42,9 +42,16 @@ SodyoSDK.start(
 
 Set Sodyo event listener (events from scanner)
 ```
+inteface IEventData {
+    MarkerValue: string
+    ActionType?: string // for example, 'CLOSE'
+    Parameters?: { [key: string]: string } // for example, { "color":"#ffffff" }
+}
+
 const unsubscribe = SodyoSDK.setSodyoEventListener((eventName, eventData) => {
 ...
 })
+
 unsubscribe()
 ```
 
