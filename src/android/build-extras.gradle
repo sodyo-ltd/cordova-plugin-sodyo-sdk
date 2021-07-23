@@ -20,7 +20,7 @@ ext.postBuildExtras = {
        }
   }
   dependencies {
-    implementation ('com.sodyo:sodyo-android-sdk:3.54.24') {
+    implementation ('com.sodyo:sodyo-android-sdk:3.54.27') {
       transitive = true
     }
   }

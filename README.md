@@ -1,9 +1,9 @@
 
 # Sodyo SDK Cordova Plugin that wraps Sodyo sdk for android and ios
 
-[SodyoSDK for iOS](https://github.com/sodyo-ltd/SodyoSDKPod) v 3.54.24
+[SodyoSDK for iOS](https://github.com/sodyo-ltd/SodyoSDKPod) v 3.54.22
 
-[SodyoSDK for Android](https://search.maven.org/search?q=a:sodyo-android-sdk) v 3.54.18
+[SodyoSDK for Android](https://search.maven.org/search?q=a:sodyo-android-sdk) v 3.54.27
 
 
 ## Install
