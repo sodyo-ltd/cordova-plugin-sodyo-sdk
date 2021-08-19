@@ -91,3 +91,7 @@ SodyoSDK.setOverlayView('<a href="sodyosdk://handleClose">Close</a>')
 SodyoSDK.setOverlayCallback('handleClose', () => { /* do something */ });
 ```
 
+Setting visibility of the Sodyo logo
+```
+SodyoSDK.setSodyoLogoVisible(false)
+```

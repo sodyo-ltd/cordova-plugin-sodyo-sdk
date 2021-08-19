@@ -91,3 +91,7 @@ module.exports.setSodyoEventListener = function(callback) {
 
   return () => removeCallback('sodyoEvent')
 }
+
+module.exports.setSodyoLogoVisible = function(isVisible) {
+  return exec(null, null, 'SodyoSDKWrapper', 'setSodyoLogoVisible', [isVisible])
+}

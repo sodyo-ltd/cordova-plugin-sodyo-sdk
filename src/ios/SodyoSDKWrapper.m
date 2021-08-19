@@ -22,6 +22,8 @@
 
 - (void)setScannerParams:(CDVInvokedUrlCommand*)command;
 
+- (void)setSodyoLogoVisible:(CDVInvokedUrlCommand*)command;
+
 - (void)setOverlayView:(CDVInvokedUrlCommand*)command;
 
 - (void)registerCallback:(CDVInvokedUrlCommand*)command;
@@ -81,6 +83,19 @@
     NSLog(@"setUserInfo");
     NSDictionary* userInfo = [command.arguments objectAtIndex:0];
     [SodyoSDK setUserInfo:userInfo];
+}
+
+- (void)setSodyoLogoVisible:(CDVInvokedUrlCommand*)command
+{
+    NSLog(@"setSodyoLogoVisible");
+
+    BOOL* isVisible = [command.arguments objectAtIndex:0];
+
+    if (isVisible) {
+        return [SodyoSDK showDefaultOverlay];
+    }
+
+    [SodyoSDK hideDefaultOverlay];
 }
 
 - (void)setScannerParams:(CDVInvokedUrlCommand*)command
