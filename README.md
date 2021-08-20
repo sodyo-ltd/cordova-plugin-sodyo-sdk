@@ -60,6 +60,11 @@ Close Sodyo scanner
 SodyoSDK.close()
 ```
 
+Load marker by Id
+```
+SodyoSDK.performMarker(markerId)
+```
+
 Personal User Information
 
 ```

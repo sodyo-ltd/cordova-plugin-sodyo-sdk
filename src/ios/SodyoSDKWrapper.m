@@ -24,6 +24,8 @@
 
 - (void)setSodyoLogoVisible:(CDVInvokedUrlCommand*)command;
 
+- (void)performMarker:(CDVInvokedUrlCommand*)command;
+
 - (void)setOverlayView:(CDVInvokedUrlCommand*)command;
 
 - (void)registerCallback:(CDVInvokedUrlCommand*)command;
@@ -96,6 +98,16 @@
     }
 
     [SodyoSDK hideDefaultOverlay];
+}
+
+- (void)performMarker:(CDVInvokedUrlCommand*)command
+{
+    NSLog(@"performMarker");
+
+    NSString* markerId = [command.arguments objectAtIndex:0];
+
+    [SodyoSDK setPresentingViewController:self.viewController];
+    [SodyoSDK performMarker:markerId];
 }
 
 - (void)setScannerParams:(CDVInvokedUrlCommand*)command

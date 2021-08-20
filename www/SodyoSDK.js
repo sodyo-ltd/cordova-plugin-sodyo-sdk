@@ -95,3 +95,7 @@ module.exports.setSodyoEventListener = function(callback) {
 module.exports.setSodyoLogoVisible = function(isVisible) {
   return exec(null, null, 'SodyoSDKWrapper', 'setSodyoLogoVisible', [isVisible])
 }
+
+module.exports.performMarker = function(markerId) {
+  return exec(null, null, 'SodyoSDKWrapper', 'performMarker', [markerId])
+}

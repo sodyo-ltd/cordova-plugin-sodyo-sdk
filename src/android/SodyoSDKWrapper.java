@@ -188,6 +188,11 @@ public class SodyoSDKWrapper extends CordovaPlugin {
             return true;
         }
 
+        if (action.equals("performMarker")) {
+            this.performMarker(args.getString(0));
+            return true;
+        }
+
         return false;
     }
 
@@ -307,5 +312,10 @@ public class SodyoSDKWrapper extends CordovaPlugin {
     private void setSodyoLogoVisible(Boolean isVisible) {
       Log.i(TAG, "setSodyoLogoVisible()");
       Sodyo.setSodyoLogoVisible(isVisible);
+    }
+
+    private void performMarker(String markerId) {
+        Log.i(TAG, "performMarker()");
+        Sodyo.performMarker(markerId, this.context);
     }
 }
