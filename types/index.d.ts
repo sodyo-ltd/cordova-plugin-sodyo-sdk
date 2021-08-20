@@ -9,4 +9,6 @@ declare var SodyoSDK: {
   setAppUserId (appUserId: string): void
   setOverlayView (html: string): void
   setOverlayCallback (callbackName: string, callback: () => void): void
+  setSodyoLogoVisible (isVisible: boolean): void
+  performMarker (markerId: string): void
 }
