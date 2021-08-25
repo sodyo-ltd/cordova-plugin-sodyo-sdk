@@ -43,7 +43,7 @@
             <config>
             </config>
             <pods use-frameworks="true">
-                <pod name="SodyoSDK" spec="~> 3.54.22"/>
+                <pod name="SodyoSDK" spec="3.54.22"/>
             </pods>
         </podspec>
 
