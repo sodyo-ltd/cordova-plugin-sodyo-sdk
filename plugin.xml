@@ -14,7 +14,11 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:name="com.sodyo.sdk.SodyoScannerActivity" android:label="@string/app_name">
+            <activity
+                    android:name="com.sodyo.sdk.SodyoScannerActivity"
+                    android:label="@string/app_name"
+                    android:exported="false"
+            >
                 <intent-filter>
                     <action android:name="android.intent.action.VIEW"/>
 
