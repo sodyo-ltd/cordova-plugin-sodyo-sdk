@@ -91,7 +91,7 @@
 {
     NSLog(@"setSodyoLogoVisible");
 
-    BOOL* isVisible = [command.arguments objectAtIndex:0];
+    BOOL isVisible = [[command.arguments objectAtIndex:0] boolValue];
 
     if (isVisible) {
         return [SodyoSDK showDefaultOverlay];
