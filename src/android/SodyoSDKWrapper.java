@@ -47,8 +47,11 @@ public class SodyoSDKWrapper extends CordovaPlugin {
          * SodyoInitCallback implementation
          */
         public void onSodyoAppLoadSuccess() {
-            String message = "onSodyoAppLoadSuccess";
-            Log.i(TAG, message);
+            Log.i(TAG, "onSodyoAppLoadSuccess");
+
+            SodyoCallback callbackClosure = new SodyoCallback(callbackContext);
+            Sodyo.getInstance().setSodyoEventCallback(callbackClosure);
+
             callbackContext.success();
         }
 
@@ -240,7 +243,6 @@ public class SodyoSDKWrapper extends CordovaPlugin {
         Intent intent = new Intent(this.context, SodyoScannerActivity.class);
         this.context.startActivityForResult(intent, SODYO_SCANNER_REQUEST_CODE);
         Sodyo.getInstance().setSodyoScannerCallback(callbackClosure);
-        Sodyo.getInstance().setSodyoEventCallback(callbackClosure);
     }
 
     private void close() {
